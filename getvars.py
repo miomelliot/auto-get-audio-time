@@ -26,7 +26,7 @@ def create_hierarchy(row):
             elif(VARIABLES.index(other_row['name'])==2): data=store_name_2
             elif(VARIABLES.index(other_row['name'])==3): data=date
             else: data=product_name
-        hierarchy_list.append((other_row['name'], *data, round((other_row['start, ms']-start_var)*1000), round((other_row['end, ms']-start_var)*1000)))
+        hierarchy_list.append((other_row['name'], *data, round((other_row['start, ms']-start_var)*1000), round((other_row['end, ms']-other_row['start, ms'])*1000)))
 
     output=json.dumps(hierarchy_list, ensure_ascii=False).replace('[', '(').replace(']', ')').replace('\"', "'")
     output=list(output)
