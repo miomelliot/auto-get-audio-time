@@ -7,7 +7,7 @@ client_name=['Иван','Александр']
 store_name_1=['Эльдорадо','Мвидео']
 store_name_2=['Эльдорадо','Мвидео']
 date=['01.01.2011', '20.02.2022']
-product_name=['телевизор TOSHIBA','сплит система Hi']
+product_name=['утюг','сплит система Hi']
 
 def filter_rows(row):
     return row['name'] not in VARIABLES
@@ -28,7 +28,7 @@ def create_hierarchy(row):
             else: data=product_name
         hierarchy_list.append((other_row['name'], *data, round((other_row['start, ms']-start_var)*1000), round((other_row['end, ms']-start_var)*1000)))
 
-    output=json.dumps(hierarchy_list, ensure_ascii=False).replace('[', '(').replace(']', ')')
+    output=json.dumps(hierarchy_list, ensure_ascii=False).replace('[', '(').replace(']', ')').replace('\"', "'")
     output=list(output)
     output[0]='['
     output[-1]=']'
