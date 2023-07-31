@@ -28,7 +28,6 @@ def create_hierarchy(row):
             else: data=product_name
         hierarchy_list.append((other_row['name'], *data, round((other_row['start, ms']-start_var)*1000), round((other_row['end, ms']-start_var)*1000)))
 
-    hierarchy_list.append(("template", row['template']))
     output=json.dumps(hierarchy_list, ensure_ascii=False).replace('[', '(').replace(']', ')')
     output=list(output)
     output[0]='['
@@ -49,7 +48,7 @@ def get_mark_json(data):
     for name in output['name'].unique():
         rows=df[df['name']==name]
         nested_labels=rows['hierarchy'].tolist()
-        data_dict[name]={'variables': nested_labels}
+        data_dict[name]={'variables': nested_labels, 'template': rows['template'].tolist()}
 
     with open('marks.json', 'w', encoding='utf-8') as file:
         json.dump(data_dict, file, ensure_ascii=False)
