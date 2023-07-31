@@ -26,8 +26,9 @@ def create_hierarchy(row):
             elif(VARIABLES.index(other_row['name'])==2): data=store_name_2
             elif(VARIABLES.index(other_row['name'])==3): data=date
             else: data=product_name
-        hierarchy_list.append((other_row['name'], *data, (other_row['start, ms']-start_var)*1000, (other_row['end, ms']-start_var)*1000))
+        hierarchy_list.append((other_row['name'], *data, round((other_row['start, ms']-start_var)*1000), round((other_row['end, ms']-start_var)*1000)))
 
+    hierarchy_list.append(("template", row['template']))
     output=json.dumps(hierarchy_list, ensure_ascii=False).replace('[', '(').replace(']', ')')
     output=list(output)
     output[0]='['
@@ -42,10 +43,7 @@ def get_mark_json(data):
     output['hierarchy']=output.apply(create_hierarchy, axis=1)
     output=output[output.apply(filter_rows, axis=1)]
 
-
     print(output)
-
-    
 
     data_dict={}
     for name in output['name'].unique():
