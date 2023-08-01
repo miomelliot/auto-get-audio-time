@@ -4,10 +4,10 @@ import json
 df=pd.read_excel('метки.xlsx')[2:]
 VARIABLES=["client_name", "store_name_1", "store_name_2", "date", "product_name"]
 client_name=['Иван','Александр']
-store_name_1=['Эльдорадо','Мвидео']
-store_name_2=['Эльдорадо','Мвидео']
+store_name_1=['Мвидео','Эльдорадо']
+store_name_2=['Мвидео','Эльдорадо']
 date=['01.01.2011', '20.02.2022']
-product_name=['утюг','сплит система Hi']
+product_name=['утюг','телевизор']
 
 def filter_rows(row):
     return row['name'] not in VARIABLES
