@@ -21,6 +21,7 @@ def process_request(url, params, input_file, output_folder):
         else:
             print(f"Произошла ошибка при обработке файла {input_file}.")
             print(response.json())
+            # print(params)
 
 def main():
     url = "https://paidmethods.mcn.ru/api/private/api/speech/brandVoice"  # Укажите URL для отправки POST-запроса
@@ -40,8 +41,10 @@ def main():
 
         for i in parameters:
             filename=i.replace(':','_')+" 2.wav"
-            param=parameters[i]
+            param={}
             param["accountID"]=accountID
+            param["variables"]=parameters[i]['variables'][0]
+            param["template"]=parameters[i]['template'][0]
             input_path = os.path.join(input_folder, filename)
             futures.append(executor.submit(process_request, url, param, input_path, output_folder))
 
